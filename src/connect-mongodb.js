@@ -12,10 +12,9 @@ const findDocument = (query) => {
                    
         if (result.length > 0) {
             console.log("Name: " + result[0])
+            query_result = result[0]
             return result[0]
         }
-    }).then((res) => {
-        query_result = res
     })
     console.log("query result1: " + query_result)
     return query_result
