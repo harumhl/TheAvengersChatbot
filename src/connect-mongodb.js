@@ -5,15 +5,17 @@ var myCollection
 
 const findDocument = (query) => {
     var cursor = myCollection.find(query)
-    return cursor.toArray((err, result) => {
+    var query_result = cursor.toArray((err, result) => {
         if (err) { console.log('collection.find() error')
                    throw err }
                    
         if (result.length > 0) {
-            console.log(result[0]['character_name'])
+            console.log("Name: " + result[0]['character_name'])
             return result[0]['character_name']
         }
     })
+    console.log("query result1: " + query_result)
+    return query_result
 }
 const connectAndFindDoc = (query) => {
     
