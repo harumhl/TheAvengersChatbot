@@ -5,17 +5,18 @@ var myCollection
 
 const findDocument = (query) => {
     var cursor = myCollection.find(query)
-    cursor.toArray(function(err, result){
+    return cursor.toArray((err, result) => {
         if (err) { console.log('collection.find() error')
                    throw err }
-        console.log(result)
-        if (result.length > 0)
-            console.log("Actor: " + result[0]["actor"] + "\n")
-    });
+                   
+        if (result.length > 0) {
+            return result[0]
+        }
+    })
 }
 const connectAndFindDoc = (query) => {
     
-    MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
+    return MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
         if (err) { console.log('MongoClient.connect error')
                     throw err }
             
@@ -29,4 +30,6 @@ const connectAndFindDoc = (query) => {
 
 
 
-module.exports = connectAndFindDoc
+//module.exports = connectAndFindDoc
+//var query_request = connectAndFindDoc({actor: "Robert Downey Jr"})
+//console.log(query_result)

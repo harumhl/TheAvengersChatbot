@@ -44,14 +44,14 @@ const replyMessage = (message) => {
     message.reply()
     .then(() => {
       // Do some code after sending messages
-        message.addReply({ type: 'text', content: "after first then"})
-        message.reply()
         if (result.action && result.action.slug === 'ask-facts-character-name' && result.action.done) {
-            connectAndFindDoc(result.getMemory('user-favorite-hero'))
-            .then(query_result => {
-                message.addReply(query_result['character-name'])
-                message.reply()
-            })
+            console.log(result.getMemory('user-favorite-hero'))
+            var query_result = connectAndFindDoc(result.getMemory('user-favorite-hero'))
+            console.log(query_result)
+            //.then(query_result => {
+             //   message.addReply(query_result['character-name'])
+              //  message.reply()
+            //})
         }
     })
     .catch(err => {
