@@ -19,7 +19,8 @@ const findDocument = (query) => {
 }
 const connectAndFindDoc = (query) => {
     
-    return MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
+    var query_result
+    MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
         if (err) { console.log('MongoClient.connect error')
                     throw err }
             
@@ -27,7 +28,10 @@ const connectAndFindDoc = (query) => {
         var query_result = findDocument(query)
         db.close()
         return query_result
+    }).then((res) => {
+        query_result = res
     })
+    return query_result
 }
 
 
