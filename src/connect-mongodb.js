@@ -5,7 +5,8 @@ var myCollection
 
 const findDocument = (query) => {
     var cursor = myCollection.find(query)
-    var query_result = cursor.toArray((err, result) => {
+    var query_result
+    cursor.toArray((err, result) => {
         if (err) { console.log('collection.find() error')
                    throw err }
                    
@@ -13,6 +14,8 @@ const findDocument = (query) => {
             console.log("Name: " + result[0])
             return result[0]
         }
+    }).then((res) => {
+        query_result = res
     })
     console.log("query result1: " + query_result)
     return query_result
