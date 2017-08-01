@@ -4,6 +4,7 @@
  */
 
 const recastai = require('recastai')
+const connectAndFindDoc = require('./connect-mongodb')
 
 // This function is the core of the bot behaviour
 const replyMessage = (message) => {
@@ -30,7 +31,7 @@ const replyMessage = (message) => {
     if (result.action) {
       console.log('The conversation action is: ', result.action.slug)
     }
-
+    
     // If there is not any message return by Recast.AI for this current conversation
     if (!result.replies.length) {
       message.addReply({ type: 'text', content: 'I don\'t have the reply to this yet :)' })
@@ -43,6 +44,15 @@ const replyMessage = (message) => {
     message.reply()
     .then(() => {
       // Do some code after sending messages
+        message.addReply({ type: 'text', content: "after first then"})
+        message.reply()
+        if (result.action && result.action.slug === 'ask-facts-character-name' && result.action.done) {
+            connectAndFindDoc(result.getMemory('user-favorite-hero'))
+            .then(query_result => {
+                message.addReply(query_result['character-name'])
+                message.reply()
+            })
+        }
     })
     .catch(err => {
       console.error('Error while sending message to channel', err)
