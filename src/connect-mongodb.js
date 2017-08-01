@@ -32,7 +32,6 @@ const connectAndFindDoc = (query) => {
 
 
 
-
 module.exports = connectAndFindDoc
 //var query_request = connectAndFindDoc({hero_name: "Hulk"})
 //console.log(query_result)
