@@ -10,7 +10,8 @@ const findDocument = (query) => {
                    throw err }
                    
         if (result.length > 0) {
-            return result[0]
+            console.log(result[0]['character_name'])
+            return result[0]['character_name']
         }
     })
 }
@@ -30,6 +31,6 @@ const connectAndFindDoc = (query) => {
 
 
 
-module.exports = connectAndFindDoc
-//var query_request = connectAndFindDoc({actor: "Robert Downey Jr"})
+//module.exports = connectAndFindDoc
+var query_request = connectAndFindDoc({hero_name: "Hulk"})
 //console.log(query_result)
