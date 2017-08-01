@@ -30,6 +30,6 @@ const connectAndFindDoc = (query) => {
 
 
 
-//module.exports = connectAndFindDoc
+module.exports = connectAndFindDoc
 //var query_request = connectAndFindDoc({actor: "Robert Downey Jr"})
 //console.log(query_result)
