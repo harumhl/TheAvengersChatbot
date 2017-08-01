@@ -10,8 +10,8 @@ const findDocument = (query) => {
                    throw err }
                    
         if (result.length > 0) {
-            console.log("Name: " + result[0]['character_name'])
-            return result[0]['character_name']
+            console.log("Name: " + result[0])
+            return result[0]
         }
     })
     console.log("query result1: " + query_result)
