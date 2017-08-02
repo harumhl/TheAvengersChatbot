@@ -60,9 +60,8 @@ const _connectAndFindDoc = (query, callback) => {
 }
 
 const connectAndFindDoc = (query) => {
+    var query_result
     _connectAndFindDoc (query, function(err, result0){
-                       console.log("111")
-                       console.log(result0)
                        query_result = result0})
     return query_result
 }/*
