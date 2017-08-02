@@ -37,41 +37,47 @@ var http = require('http')
 var MongoClient = require('mongodb').MongoClient
 var myCollection
 var query_result
+var flag = false
 
 const _connectAndFindDoc = (query, callback, result_storage) => {
     
-    return MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
+    MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
         if (err) { console.log('MongoClient.connect error')
                     throw err }
                         
         var cursor = db.collection("TheAvengers").find(query)
-        return cursor.toArray((err, result) => {
+        cursor.toArray((err, result) => {
             if (err) { console.log('collection.find() error')
                         throw err }
                        
             if (result.length > 0) {
                 db.close()
-                return callback(err, result[0], result_storage)
+                callback(err, result[0], result_storage)
             }
         })
     })
+    
 }
 
 const connectAndFindDoc = (query, result_storage) => {
-    return _connectAndFindDoc (query,
+    _connectAndFindDoc (query,
                         function(err, result0, result_storage){
                             result_storage = result0
-                            console.log("callback")
-                            console.log(result_storage)
-                            return result0},
+                            query_result = result0
+                        },
                         result_storage)
+    
+    var theInterval = setInterval(function(){
+                                if(typeof query_result !== 'undefined')
+                                    clearInterval(theInterval);
+                                    console.log(query_result)
+                                  }, 100)
+    return query_result
 }
 
 
 
-
-//query_result = connectAndFindDoc({hero_name: "Hulk"},
-//                                 function(query_result){console.log(query_result)})
+connectAndFindDoc({hero_name: "Hulk"}, query_result)
 //console.log("the end")
 //console.log(query_result)
 module.exports = connectAndFindDoc
