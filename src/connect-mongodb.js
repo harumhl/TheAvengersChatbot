@@ -77,7 +77,7 @@ const connectAndFindDoc = (query, result_storage) => {
 
 
 
-connectAndFindDoc({hero_name: "Hulk"}, query_result)
+//connectAndFindDoc({hero_name: "Hulk"}, query_result)
 //console.log("the end")
 //console.log(query_result)
 module.exports = connectAndFindDoc
