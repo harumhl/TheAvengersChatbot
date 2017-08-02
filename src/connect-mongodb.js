@@ -38,7 +38,7 @@ var MongoClient = require('mongodb').MongoClient
 var myCollection
 var query_result
 
-const _connectAndFindDoc = (query, callback) => {
+const _connectAndFindDoc = (query, callback, messageReply) => {
     
     MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
         if (err) { console.log('MongoClient.connect error')
@@ -50,22 +50,30 @@ const _connectAndFindDoc = (query, callback) => {
                         throw err }
                        
             if (result.length > 0) {
-                console.log("Name: ")
-                console.log(result[0])
+                //console.log("Name: ")
+                //console.log(result[0])
                 db.close()
-                callback(err, result[0])
+                callback(err, result[0], messageReply)
             }
         })
     })
 }
 
-const connectAndFindDoc = (query) => {
-    var query_result
-    _connectAndFindDoc (query, function(err, result0){
-                       query_result = result0})
+const connectAndFindDoc = (query, messageReply) => {
+    _connectAndFindDoc (query,
+                        function(err, result0, messageReply){
+                            query_result = result0
+                            messageReply(query_result)
+                            return result0},
+                        messageReply)
     return query_result
-}/*
-query_result = connectAndFindDoc({hero_name: "Hulk"})
-console.log("the end")
-console.log(query_result)*/
-module.exports = connectAndFindDoc
+}
+
+
+
+
+query_result = connectAndFindDoc({hero_name: "Hulk"},
+                                 function(query_result){console.log(query_result)})
+//console.log("the end")
+//console.log(query_result)
+//module.exports = connectAndFindDoc
