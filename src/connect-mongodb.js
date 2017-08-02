@@ -38,7 +38,7 @@ var MongoClient = require('mongodb').MongoClient
 var myCollection
 var query_result
 
-const _connectAndFindDoc = (query, callback, messageReply) => {
+const _connectAndFindDoc = (query, callback, message, messageReply) => {
     
     MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
         if (err) { console.log('MongoClient.connect error')
@@ -53,19 +53,19 @@ const _connectAndFindDoc = (query, callback, messageReply) => {
                 //console.log("Name: ")
                 //console.log(result[0])
                 db.close()
-                callback(err, result[0], messageReply)
+                callback(err, result[0], message, messageReply)
             }
         })
     })
 }
 
-const connectAndFindDoc = (query, messageReply) => {
+const connectAndFindDoc = (query, message, messageReply) => {
     _connectAndFindDoc (query,
-                        function(err, result0, messageReply){
+                        function(err, result0, message, messageReply){
                             query_result = result0
-                            messageReply(query_result)
+                            messageReply(message, query_result)
                             return result0},
-                        messageReply)
+                        message, messageReply)
     return query_result
 }
 
