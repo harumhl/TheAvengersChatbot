@@ -53,19 +53,18 @@ const _connectAndFindDoc = (query, callback, result_storage) => {
                 //console.log("Name: ")
                 //console.log(result[0])
                 db.close()
-                callback(err, result[0], result_storage)
+                return callback(err, result[0], result_storage)
             }
         })
     })
 }
 
 const connectAndFindDoc = (query, result_storage) => {
-    _connectAndFindDoc (query,
+    return _connectAndFindDoc (query,
                         function(err, result0, result_storage){
                             result_storage = result0
                             return result0},
                         result_storage)
-    return query_result
 }
 
 
