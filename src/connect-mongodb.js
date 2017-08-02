@@ -59,6 +59,7 @@ const _connectAndFindDoc = (query, callback, result_storage) => {
 }
 
 const connectAndFindDoc = (query, result_storage) => {
+    console.log(query)
     _connectAndFindDoc (query,
                         function(err, result0, result_storage){
                             result_storage = result0
