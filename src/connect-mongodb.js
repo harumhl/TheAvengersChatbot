@@ -65,9 +65,10 @@ const connectAndFindDoc = (query, result_storage) => {
                             query_result = result0
                         },
                         result_storage)
-    
-    var theInterval = setInterval(function(){
-                                if(typeof query_result !== 'undefined')
+    var i = 0
+    var theInterval = setInterval(function(){console.log(i)
+                                i = i + 1
+                                if(typeof query_result !== 'undefined' || i >= 25)
                                     clearInterval(theInterval);
                                     console.log(query_result)
                                   }, 100)
