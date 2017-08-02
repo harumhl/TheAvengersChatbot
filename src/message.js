@@ -51,11 +51,11 @@ const replyMessage = (message) => {
             console.log("q_r")
             console.log(q_r)
             console.log("query_result")
-            console.log(query_result)
+            console.log(query_result['character_name'])
             //.then(query_result => {
             message.addReply({type: 'text', content: query_result['character_name']})
-            console.log("name: " + query_result['character_name'])
             message.reply()
+            console.log("name: " + query_result['character_name'])
             //})
         }
     })
