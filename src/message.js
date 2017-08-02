@@ -55,7 +55,7 @@ const replyMessage = (message) => {
           var i = 0
           var theInterval = setInterval(function(){console.log(i+100)
                                         i = i + 1
-                                        if(typeof query_result !== 'undefined' || i >= 20) // 5 sec
+                                        if(Object.keys(query_result).length === 0 || i >= 20) // 5 sec
                                         clearInterval(theInterval);
                                         console.log(query_result)
                                         }, 250)
