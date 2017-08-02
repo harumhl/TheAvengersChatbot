@@ -72,8 +72,8 @@ const connectAndFindDoc = (query, messageReply) => {
 
 
 
-query_result = connectAndFindDoc({hero_name: "Hulk"},
+//query_result = connectAndFindDoc({hero_name: "Hulk"},
                                  function(query_result){console.log(query_result)})
 //console.log("the end")
 //console.log(query_result)
-//module.exports = connectAndFindDoc
+module.exports = connectAndFindDoc
