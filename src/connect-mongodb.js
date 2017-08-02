@@ -40,12 +40,12 @@ var query_result
 
 const _connectAndFindDoc = (query, callback, result_storage) => {
     
-    MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
+    return MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
         if (err) { console.log('MongoClient.connect error')
                     throw err }
                         
         var cursor = db.collection("TheAvengers").find(query)
-        cursor.toArray((err, result) => {
+        return cursor.toArray((err, result) => {
             if (err) { console.log('collection.find() error')
                         throw err }
                        
