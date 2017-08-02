@@ -56,7 +56,6 @@ const _connectAndFindDoc = (query, callback, result_storage) => {
             }
         })
     })
-    
 }
 
 const connectAndFindDoc = (query, result_storage) => {
