@@ -48,7 +48,9 @@ const replyMessage = (message) => {
             // SHOULD NOT BE FAV HERO TBH TEMP TEMP TEMP
             var query_result = {}
             var q_r = connectAndFindDoc({hero_name: result.getMemory('user-favorite-hero').raw}, query_result)
+            console.log("q_r")
             console.log(q_r)
+            console.log("query_result")
             console.log(query_result)
             //.then(query_result => {
             //message.addReply(query_result['character-name'])

@@ -50,8 +50,6 @@ const _connectAndFindDoc = (query, callback, result_storage) => {
                         throw err }
                        
             if (result.length > 0) {
-                //console.log("Name: ")
-                //console.log(result[0])
                 db.close()
                 return callback(err, result[0], result_storage)
             }
