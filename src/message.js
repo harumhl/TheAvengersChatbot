@@ -52,6 +52,13 @@ const replyMessage = (message) => {
             console.log(q_r)
             console.log("query_result")
             console.log(query_result['character_name'])
+          var i = 0
+          var theInterval = setInterval(function(){console.log(i+100)
+                                        i = i + 1
+                                        if(typeof query_result !== 'undefined' || i >= 20) // 5 sec
+                                        clearInterval(theInterval);
+                                        console.log(query_result)
+                                        }, 250)
             //.then(query_result => {
             message.addReply({ type: 'text', content: query_result['character_name'] })
             message.addReply({ type: 'text', content: 'whatever' })
