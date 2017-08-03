@@ -55,9 +55,10 @@ const replyMessage = (message) => {
           var i = 0
           var theInterval = setInterval(function(){console.log(i+100)
                                         i = i + 1
-                                        if(Object.keys(query_result).length === 0 || i >= 20) // 5 sec
-                                        clearInterval(theInterval);
                                         console.log(query_result)
+                                        if(Object.keys(query_result).length === 0 || i >= 20) { // 5 sec
+                                        clearInterval(theInterval);
+                                        console.log("found")}
                                         }, 250)
             //.then(query_result => {
             message.addReply({ type: 'text', content: query_result['character_name'] })
