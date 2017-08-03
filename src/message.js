@@ -53,13 +53,22 @@ const replyMessage = (message) => {
             console.log("query_result")
             console.log(query_result['character_name'])
           var i = 0
+          var flag = false
           var theInterval = setInterval(function(){console.log(i+100)
                                         i = i + 1
                                         console.log(query_result)
-                                        if(Object.keys(query_result).length === 0 || i >= 20) { // 5 sec
+                                        if(Object.keys(query_result).length > 0 || i >= 20) { // 5 sec
                                         clearInterval(theInterval);
-                                        console.log("found")}
+                                        flag = true}
                                         }, 250)
+          var newInterval = setInterval(function(){
+                                        console.log("hmm")
+                                        if(flag == true) {
+                                            console.log("found")
+                                        clearInterval(newInterval)
+                                        }
+                                        
+                                        },250)
             //.then(query_result => {
             message.addReply({ type: 'text', content: query_result['character_name'] })
             message.addReply({ type: 'text', content: 'whatever' })
