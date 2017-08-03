@@ -57,16 +57,15 @@ const replyMessage = (message) => {
           var theInterval = setInterval(function(){console.log(i+100)
                                         i = i + 1
                                         console.log(query_result)
-                                        if(Object.keys(query_result).length > 0 || i >= 20) { // 5 sec
-                                        console.log("clear1")
+                                        if(Object.keys(query_result).length > 0 || i >= 50) { // 5 sec
+                                        console.log(i)
                                         console.log(query_result)
                                         clearInterval(theInterval);
                                         flag = true}
                                         }, 250)
           var newInterval = setInterval(function(){
-                                        console.log("hmm")
                                         if(flag == true) {
-                                            console.log("found")
+                                            console.log("over")
                                             console.log(query_result)
                                         clearInterval(newInterval)
                                         }
