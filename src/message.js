@@ -58,6 +58,8 @@ const replyMessage = (message) => {
                                         i = i + 1
                                         console.log(query_result)
                                         if(Object.keys(query_result).length > 0 || i >= 20) { // 5 sec
+                                        console.log("clear1")
+                                        console.log(query_result)
                                         clearInterval(theInterval);
                                         flag = true}
                                         }, 250)
@@ -65,6 +67,7 @@ const replyMessage = (message) => {
                                         console.log("hmm")
                                         if(flag == true) {
                                             console.log("found")
+                                            console.log(query_result)
                                         clearInterval(newInterval)
                                         }
                                         
