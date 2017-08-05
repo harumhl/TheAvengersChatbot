@@ -52,7 +52,7 @@ const replyMessage = (message) => {
             console.log(q_r)
             console.log("then")
             q_r.then(function(qr) {console.log("thth"); console.log(qr);
-                   message.addReply({ type: 'text', content: query_result['character_name'] })
+                   message.addReply({ type: 'text', content: qr['character_name'] })
                    message.addReply({ type: 'text', content: 'whatever' })
                    message.reply()
             },console.error)
