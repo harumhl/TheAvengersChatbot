@@ -46,14 +46,13 @@ const replyMessage = (message) => {
     .then(() => {
         // Do some code after sending messages
         // Developer-defined message replies
-        console.log(result.action)
-        console.log(result.action.done)
         if (result.action && result.action.done) {
             if(result.action.slug === 'ask-facts-character-name') {
+            console.log("in ifs")
+            console.log(result.getMemory('query-hero-name').raw)
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
-                console.log(query_result) 
-                console.log(result)
+                console.log(query_result)
                 console.log(result.status)
                 if (result['status'] >= 300) {
                     message.addReply("Sorry, my head is overloaded right now.. Ask me differently")
