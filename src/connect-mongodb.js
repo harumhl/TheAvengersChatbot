@@ -35,9 +35,7 @@ console.log(query_result)
 */
 var http = require('http')
 var MongoClient = require('mongodb').MongoClient
-var Promise = require('es6-promise').Promise;
-var myCollection
-var query_result
+var Promise = require('es6-promise').Promise
 
 const connectAndFindDoc = (query, result_storage) => {
     return new Promise((resolve, reject) => {
