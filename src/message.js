@@ -54,13 +54,27 @@ const replyMessage = (message) => {
                 const answers = [`I think it's ${query_result.character_name}`,
                                  `It's ${query_result.character_name}, isn't it?`,
                                  `If I remember correctly, it is ${query_result.character_name}.`,
-                                 `My memory tells it is ${query_result.character_name}`,
+                                 `My memory tells me it is ${query_result.character_name}`,
                                  `Hmm, I have a strong feeling it must be ${query_result.character_name}`]
                 message.addReply({type: 'text', content: random(answers)})
-                message.addReply({type: 'text', content: `${query_result.character_name} says hi`})
                 message.reply()
-                .then(() => console.log("answered"))
-                .catch(err => console.error('Error in developer-defined replies: ', err))
+                .then(() => console.log("answered for ask-facts-character-name"))
+                .catch(err => console.error('Error in ask-facts-character-name reply: ', err))
+                })
+            }
+            else if(result.action.slug === 'ask-facts-actor-name') {
+            connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
+            .then(query_result => {
+                console.log(query_result)
+                const answers = [`I think it's ${query_result.actor_name}`,
+                                 `It's ${query_result.actor_name}, isn't it?`,
+                                 `If I remember correctly, it is ${query_result.actor_name}.`,
+                                 `My memory tells me it is ${query_result.actor_name}`,
+                                 `Hmm, I have a strong feeling it must be ${query_result.actor_name}`]
+                message.addReply({type: 'text', content: random(answers)})
+                message.reply()
+                .then(() => console.log("answered for ask-facts-actor-name"))
+                .catch(err => console.error('Error in ask-facts-actor-name reply: ', err))
                 })
             }
         }
