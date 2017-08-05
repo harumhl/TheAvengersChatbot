@@ -41,7 +41,6 @@ const replyMessage = (message) => {
       result.replies.forEach(replyContent => message.addReply({ type: 'text', content: replyContent }))
     }
         
-    
     // Send all replies
     message.reply()
     .then(() => {
@@ -52,7 +51,7 @@ const replyMessage = (message) => {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
                 console.log(query_result)
-                message.addReply({type: 'text', content: query_result['character_name'] })/*
+                message.addReply({type: 'text', content: query_result['character_name']})/*
                 const answers = ["hi","yo","um","hehe","hee"]
                 var randomized = random(answers)
                 console.log(randomized)
@@ -60,6 +59,8 @@ const replyMessage = (message) => {
                 message.reply()
                 message.addReply({type: 'text', content: `${query_result.character_name} says hi`})*/
                 message.reply()
+                .then(() => console.log("happy"))
+                .catch(err => console.error('ugh', err))
                 })
             }
         }
