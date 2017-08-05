@@ -51,15 +51,15 @@ const replyMessage = (message) => {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
                 console.log(query_result)
-                message.addReply({type: 'text', content: query_result['character_name']})/*
+                message.addReply({type: 'text', content: query_result['character_name']})
                 const answers = ["hi","yo","um","hehe","hee"]
                 var randomized = random(answers)
                 console.log(randomized)
-                message.addReply({type: 'text', content: randomized})
+                message.addReply({type: 'text', content: randomized})/*
                 message.reply()
                 message.addReply({type: 'text', content: `${query_result.character_name} says hi`})*/
                 message.reply()
-                .then(() => console.log("happy"))
+                .then(() => console.log("answered"))
                 .catch(err => console.error('ugh', err))
                 })
             }
