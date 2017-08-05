@@ -54,6 +54,8 @@ const replyMessage = (message) => {
                   message.addReply({ type: 'text', content: 'whatever' })
                   message.addReply({ type: 'text', content: query_result['character_name'] })
                   message.reply()
+                  .then(() => console.log("happy"))
+                  .catch(err => console.error('welp', err))
                   //message.addReply(query_result)
             })
             q2.then(qqq => console.log(qqq))
