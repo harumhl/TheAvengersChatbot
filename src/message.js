@@ -43,17 +43,17 @@ const replyMessage = (message) => {
 
 
     // Develop-defined message replies
-    console.log(message)
-    message.addReply({type: 'text', content: "hi"})
     if (result.action && result.action.done) {
         if(result.action.slug === 'ask-facts-character-name') {
-            var query_result = connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
-        
-            console.log(query_result)
-            console.log(query_result[_result]['character_name'])
-            console.log(result)
-            message.addReply({ type: 'text', content: 'whatever' })
-            message.addReply({ type: 'text', content: query_result[_result]['character_name'] })
+            connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
+            .then(query_result => {
+                  console.log(query_result)
+                  console.log(query_result['character_name'])
+                  console.log(result)
+                  message.addReply({ type: 'text', content: 'whatever' })
+                  message.addReply({ type: 'text', content: query_result['character_name'] })
+                  //message.addReply(query_result)
+            })
         }
     }
       
