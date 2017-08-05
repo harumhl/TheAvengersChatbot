@@ -52,6 +52,7 @@ const replyMessage = (message) => {
             .then(query_result => {
                 console.log(message)
                 console.log(result)
+                console.log(request)
                 console.log(result.getMemory('query-hero-name').raw)
                 console.log(query_result)
                 const answers = [`I think it's ${query_result.character_name}`,
