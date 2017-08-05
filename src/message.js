@@ -5,6 +5,7 @@
 
 const recastai = require('recastai')
 const connectAndFindDoc = require('./connect-mongodb')
+const random = array => { return array[Math.floor(Math.random() * array.length)] }
 
 // This function is the core of the bot behaviour
 const replyMessage = (message) => {
@@ -40,7 +41,6 @@ const replyMessage = (message) => {
       result.replies.forEach(replyContent => message.addReply({ type: 'text', content: replyContent }))
     }
         
-    const random = array => { return array[Math.floor(Math.random() * array.length)] }
     
     // Send all replies
     message.reply()
