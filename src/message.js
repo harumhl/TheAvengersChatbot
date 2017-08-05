@@ -45,18 +45,16 @@ const replyMessage = (message) => {
     .then(() => {
       // Do some code after sending messages
         if (result.action && result.action.slug === 'ask-facts-character-name' && result.action.done) {
-            connectAndFindDoc({hero_name: result.getMemory('user-favorite-hero').raw})
+            connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
                 .then(query_result => {
                       console.log("thth")
                       console.log(query_result)
                       console.log(query_result['character_name'])
                       console.log(result)
-                      message.addReply({ type: 'text', content: `more stars` })
-                      message.addReply(query_result)
-                      message.reply()
-                      message.addReply({ type: 'text', content: "whatever" })
-                      message.reply()
                       message.addReply({ type: 'text', content: query_result['character_name'] })
+                      message.addReply({ type: 'text', content: 'whatever' })
+                      message.addReply(query_result)
+                      message.addReply({ type: 'text', content: `more stars` })
                       message.reply()
             },console.error)
         }
