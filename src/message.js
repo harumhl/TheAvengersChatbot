@@ -41,10 +41,9 @@ const replyMessage = (message) => {
     }
 
         
-        // Do some code after sending messages
+    //
     console.log(message)
     message.addReply({type: 'text', content: "hi"})
-    message.reply()
     if (result.action && result.action.done) {
         if(result.action.slug === 'ask-facts-character-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
@@ -55,8 +54,6 @@ const replyMessage = (message) => {
                   message.addReply({ type: 'text', content: query_result['character_name'] })
                   message.addReply({ type: 'text', content: 'whatever' })
                   message.addReply(query_result)
-                  message.addReply({ type: 'text', content: `more stars` })
-                  message.reply()
             },console.error)
         }
     }
@@ -66,6 +63,7 @@ const replyMessage = (message) => {
     // Send all replies
     message.reply()
     .then(() => {
+        // Do some code after sending messages
     })
     .catch(err => {
       console.error('Error while sending message to channel', err)
