@@ -46,19 +46,15 @@ const replyMessage = (message) => {
     .then(() => {
         // Do some code after sending messages
         // Developer-defined message replies
+        console.log(result.getMemory('query-hero-name').raw)
         if (result.action && result.action.done) {
             if(result.action.slug === 'ask-facts-character-name') {
-            console.log(result.getMemory('query-hero-name').raw)
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
-                console.log("Hmm")
-                console.log(query_result)
-                console.log(result.status)
                 if (result['status'] >= 300) {
                     message.addReply("Sorry, my head is overloaded right now.. Ask me differently")
                     message.reply()
                 }
-                console.log(result.getMemory('query-hero-name').raw)
                 console.log(query_result)
                 const answers = [`I think it's ${query_result.character_name}`,
                                  `It's ${query_result.character_name}, isn't it?`,
@@ -71,6 +67,8 @@ const replyMessage = (message) => {
                 .catch(err => console.error('Error in ask-facts-character-name reply: ', err))
                 })
                 console.log("out")
+                console.log(result['status'])
+                console.log(message)
             }
             else if(result.action.slug === 'ask-facts-actor-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
@@ -88,6 +86,7 @@ const replyMessage = (message) => {
                 .catch(err => console.error('Error in ask-facts-actor-name reply: ', err))
                 })
             }
+
         }
 
     })
