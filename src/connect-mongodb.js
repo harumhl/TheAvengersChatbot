@@ -60,7 +60,7 @@ const connectAndFindDoc = (query) => {
 }
 
 
-connectAndFindDoc({hero_name: "Hulk"}).then(console.log, console.error)
+//connectAndFindDoc({hero_name: "Hulk"}).then(console.log, console.error)
 //console.log("the end")
 //console.log(query_result)
 module.exports = connectAndFindDoc
