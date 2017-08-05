@@ -44,13 +44,13 @@ const replyMessage = (message) => {
     message.reply()
     .then(() => {
       // Do some code after sending messages
+        console.log(message)
         message.addReply({type: 'text', content: "hi"})
         message.reply()
         if (result.action && result.action.done) {
           if(result.action.slug === 'ask-facts-character-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
                 .then(query_result => {
-                      console.log("thth")
                       console.log(query_result)
                       console.log(query_result['character_name'])
                       console.log(result)
