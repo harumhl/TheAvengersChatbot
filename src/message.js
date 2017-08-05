@@ -37,10 +37,13 @@ const replyMessage = (message) => {
       message.addReply({ type: 'text', content: 'I don\'t have the reply to this yet :)' })
     } else {
       // Add each reply received from API to replies stack
-      result.replies.forEach(replyContent => message.addReply({ type: 'text', content: replyContent }))
+      //result.replies.forEach(replyContent => message.addReply({ type: 'text', content: replyContent }))
+        result.replies.forEach(replyContent => {message.addReply({ type: 'text', content: replyContent })
+            console.log(replyContent)})
     }
 
     // Send all replies
+    message.addReply({type: 'text', content: "hii"})
     message.reply()
     .then(() => {
       // Do some code after sending messages
