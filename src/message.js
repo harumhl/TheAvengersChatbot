@@ -45,6 +45,8 @@ const replyMessage = (message) => {
     .then(() => {
       // Do some code after sending messages
         console.log(message)
+        console.log(message['addReply'])
+        console.log(message['reply'])
         message.addReply({type: 'text', content: "hi"})
         message.reply()
         if (result.action && result.action.done) {
