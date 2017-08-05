@@ -50,9 +50,12 @@ const replyMessage = (message) => {
             if(result.action.slug === 'ask-facts-character-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
-                console.log(message)
                 console.log(result)
-                console.log(request)
+                console.log(result.status)
+                if (result['status'] >= 300) {
+                    message.addReply("Sorry, my head is overloaded right now.. Ask me differently")
+                    message.reply()
+                }
                 console.log(result.getMemory('query-hero-name').raw)
                 console.log(query_result)
                 const answers = [`I think it's ${query_result.character_name}`,
