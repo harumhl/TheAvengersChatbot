@@ -45,7 +45,7 @@ const replyMessage = (message) => {
     .then(() => {
       // Do some code after sending messages
         if (result.action && result.action.slug === 'ask-facts-character-name' && result.action.done) {
-            connectAndFindDoc({hero_name: result.getMemory('user-favorite-hero').raw}, query_result)
+            connectAndFindDoc({hero_name: result.getMemory('user-favorite-hero').raw})
                 .then(query_result => {
                       console.log("thth")
                       console.log(query_result)

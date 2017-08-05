@@ -37,7 +37,7 @@ var http = require('http')
 var MongoClient = require('mongodb').MongoClient
 var Promise = require('es6-promise').Promise
 
-const connectAndFindDoc = (query, result_storage) => {
+const connectAndFindDoc = (query) => {
     return new Promise((resolve, reject) => {
     MongoClient.connect(
         "mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers",
@@ -60,8 +60,7 @@ const connectAndFindDoc = (query, result_storage) => {
 }
 
 
-
-//connectAndFindDoc({hero_name: "Hulk"}, query_result).then(console.log, console.error)
+connectAndFindDoc({hero_name: "Hulk"}).then(console.log, console.error)
 //console.log("the end")
 //console.log(query_result)
 module.exports = connectAndFindDoc
