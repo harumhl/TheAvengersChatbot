@@ -51,27 +51,9 @@ const replyMessage = (message) => {
             console.log("q_r")
             console.log(q_r)
             console.log("then")
-            q_r.then(console.log,console.error)
+            q_r.then(function(qr) {console.log("thth"); console.log(qr)},console.error)
             console.log("query_result")
             console.log(query_result['character_name'])
-          var i = 0
-          var flag = false
-          var theInterval = setInterval(function(){
-                                        i = i + 1
-                                        if(Object.keys(query_result).length > 0 || i >= 50) { // 5 sec
-                                        console.log(i)
-                                        console.log(query_result)
-                                        clearInterval(theInterval);
-                                        flag = true}
-                                        }, 250)
-          var newInterval = setInterval(function(){
-                                        if(flag == true) {
-                                            console.log("over")
-                                            console.log(query_result)
-                                        clearInterval(newInterval)
-                                        }
-                                        
-                                        },250)
             //.then(query_result => {
             message.addReply({ type: 'text', content: query_result['character_name'] })
             message.addReply({ type: 'text', content: 'whatever' })

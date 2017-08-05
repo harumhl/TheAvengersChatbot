@@ -35,6 +35,7 @@ console.log(query_result)
 */
 var http = require('http')
 var MongoClient = require('mongodb').MongoClient
+var Promise = require('es6-promise').Promise;
 var myCollection
 var query_result
 
@@ -62,7 +63,7 @@ const connectAndFindDoc = (query, result_storage) => {
 
 
 
-//connectAndFindDoc({hero_name: "Hulk"}, query_result)
+//connectAndFindDoc({hero_name: "Hulk"}, query_result).then(console.log, console.error)
 //console.log("the end")
 //console.log(query_result)
 module.exports = connectAndFindDoc
