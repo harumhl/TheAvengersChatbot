@@ -48,7 +48,8 @@ const replyMessage = (message) => {
             // SHOULD NOT BE FAV HERO TBH TEMP TEMP TEMP
             var query_result = connectAndFindDoc({hero_name: result.getMemory('user-favorite-hero').raw}, query_result)
             query_result.then(function(qr) {console.log("thth"); console.log(query_result);
-                   message.addReply({ type: 'text', content: query_result['character_name'] })
+                    console.log(query_result['_result']['character_name'])
+                   message.addReply({ type: 'text', content: query_result['_result']['character_name'] })
                    message.addReply({ type: 'text', content: "whatever" })
                    message.reply()
             },console.error)
