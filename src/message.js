@@ -50,13 +50,14 @@ const replyMessage = (message) => {
             var q_r = connectAndFindDoc({hero_name: result.getMemory('user-favorite-hero').raw}, query_result)
             console.log("q_r")
             console.log(q_r)
+            console.log("then")
+            q_r.then(console.log,console.error)
             console.log("query_result")
             console.log(query_result['character_name'])
           var i = 0
           var flag = false
-          var theInterval = setInterval(function(){console.log(i+100)
+          var theInterval = setInterval(function(){
                                         i = i + 1
-                                        console.log(query_result)
                                         if(Object.keys(query_result).length > 0 || i >= 50) { // 5 sec
                                         console.log(i)
                                         console.log(query_result)

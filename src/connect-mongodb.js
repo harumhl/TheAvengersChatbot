@@ -72,7 +72,8 @@ const connectAndFindDoc = (query, result_storage) => {
                                     clearInterval(theInterval);
                                     console.log(query_result)
                                   }, 250)
-    return query_result
+    //return query_result
+    return Promise.resolve({ type: 'text', content: query_result })
 }
 
 
