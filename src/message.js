@@ -40,28 +40,26 @@ const replyMessage = (message) => {
       result.replies.forEach(replyContent => message.addReply({ type: 'text', content: replyContent }))
     }
         
+    const random = array => { return array[Math.floor(Math.random() * array.length)] }
+    
     // Send all replies
     message.reply()
     .then(() => {
         // Do some code after sending messages
-          // Develop-defined message replies
-          if (result.action && result.action.done) {
-          if(result.action.slug === 'ask-facts-character-name') {
-          connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
-          .then(query_result => {
+        // Develop-defined message replies
+        if (result.action && result.action.done) {
+            if(result.action.slug === 'ask-facts-character-name') {
+            connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
+            .then(query_result => {
                 console.log(query_result)
-                console.log(query_result['character_name'])
-                console.log(result)
-                console.log(message)
-                message.addReply({ type: 'text', content: 'whatever' })
-                message.addReply({ type: 'text', content: query_result['character_name'] })
+                message.addReply({type: 'text', content: query_result['character_name'] })
+                message.addReply({type: 'text', content: `${query_result.character_name} says hi`})
+                const answers = ["hi","yo","um","hehe","hee"]
+                  message.addReply({type: 'text', content: random(answers)})
                 message.reply()
-                .then(() => console.log("happy"))
-                .catch(err => console.error('welp', err))
-                //message.addReply(query_result)
                 })
-          }
-          }
+            }
+        }
 
     })
     .catch(err => {
