@@ -45,8 +45,9 @@ const replyMessage = (message) => {
     // Develop-defined message replies
     if (result.action && result.action.done) {
         if(result.action.slug === 'ask-facts-character-name') {
+            message.addReply({ type: 'text', content: 'hi' })
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
-            .then(query_result => {
+            .then(function(query_result) {
                   console.log(query_result)
                   console.log(query_result['character_name'])
                   console.log(result)
