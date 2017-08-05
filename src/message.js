@@ -45,8 +45,8 @@ const replyMessage = (message) => {
     // Develop-defined message replies
     if (result.action && result.action.done) {
         if(result.action.slug === 'ask-facts-character-name') {
-            var q1 = connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
-            var q2 = q1.then(query_result => {
+            connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
+            .then(query_result => {
                   console.log(query_result)
                   console.log(query_result['character_name'])
                   console.log(result)
@@ -58,8 +58,6 @@ const replyMessage = (message) => {
                   .catch(err => console.error('welp', err))
                   //message.addReply(query_result)
             })
-            q2.then(qqq => console.log(qqq))
-            console.log(q2)
         }
     }
       
