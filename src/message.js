@@ -55,7 +55,7 @@ const replyMessage = (message) => {
                 const answers = ["hi","yo","um","hehe","hee"]
                 var randomized = random(answers)
                 console.log(randomized)
-                message.addReply({type: 'text', content: randomized})/*
+                message.addReply({type: 'text', content: random(answers)})/*
                 message.reply()
                 message.addReply({type: 'text', content: `${query_result.character_name} says hi`})*/
                 message.reply()
