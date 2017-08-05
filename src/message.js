@@ -50,7 +50,7 @@ const replyMessage = (message) => {
             if(result.action.slug === 'ask-facts-character-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
-                console.log(message)
+                console.log(message) 
                 console.log(result.getMemory('query-hero-name').raw)
                 console.log(query_result)
                 const answers = [`I think it's ${query_result.character_name}`,
