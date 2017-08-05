@@ -38,18 +38,16 @@ const replyMessage = (message) => {
     } else {
       // Add each reply received from API to replies stack
       //result.replies.forEach(replyContent => message.addReply({ type: 'text', content: replyContent }))
-        result.replies.forEach(replyContent => {message.addReply({ type: 'text', content: replyContent })
-            console.log(replyContent)})
+        result.replies.forEach(replyContent => message.addReply({ type: 'text', content: replyContent }))
     }
 
     // Send all replies
-    message.addReply({type: 'text', content: "hii"})
-    message.reply()
     .then(() => {
       // Do some code after sending messages
-        message.addReply("hi")
+        message.addReply({type: 'text', content: "hi"})
         message.reply()
-        if (result.action && result.action.slug === 'ask-facts-character-name' && result.action.done) {
+        if (result.action && result.action.done) {
+          if(result.action.slug === 'ask-facts-character-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
                 .then(query_result => {
                       console.log("thth")
@@ -62,6 +60,7 @@ const replyMessage = (message) => {
                       message.addReply({ type: 'text', content: `more stars` })
                       message.reply()
             },console.error)
+          }
         }
     })
     .catch(err => {
