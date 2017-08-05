@@ -50,6 +50,7 @@ const replyMessage = (message) => {
             if(result.action.slug === 'ask-facts-character-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
+                console.log(result.getMemory('query-hero-name').raw)
                 console.log(query_result)
                 const answers = [`I think it's ${query_result.character_name}`,
                                  `It's ${query_result.character_name}, isn't it?`,
@@ -65,6 +66,7 @@ const replyMessage = (message) => {
             else if(result.action.slug === 'ask-facts-actor-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
+                console.log(result.getMemory('query-hero-name').raw)
                 console.log(query_result)
                 const answers = [`I think it's ${query_result.actor}`,
                                  `It's ${query_result.actor}, isn't it?`,
