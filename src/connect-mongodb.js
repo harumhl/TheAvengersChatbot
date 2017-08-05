@@ -37,43 +37,27 @@ var http = require('http')
 var MongoClient = require('mongodb').MongoClient
 var myCollection
 var query_result
-var flag = false
-
-const _connectAndFindDoc = (query, callback, result_storage) => {
-    
-    MongoClient.connect("mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers", function(err, db) {
-        if (err) { console.log('MongoClient.connect error')
-                    throw err }
-                        
-        var cursor = db.collection("TheAvengers").find(query)
-        cursor.toArray((err, result) => {
-            if (err) { console.log('collection.find() error')
-                        throw err }
-                       
-            if (result.length > 0) {
-                db.close()
-                callback(err, result[0], result_storage)
-            }
-        })
-    })
-}
 
 const connectAndFindDoc = (query, result_storage) => {
-    _connectAndFindDoc (query,
-                        function(err, result0, result_storage){
-                            result_storage = result0
-                            query_result = result0
-                        },
-                        result_storage)
-    var i = 0
-    var theInterval = setInterval(function(){console.log(i)
-                                i = i + 1
-                                if(typeof query_result !== 'undefined' || i >= 20) // 5 sec
-                                    clearInterval(theInterval);
-                                    console.log(query_result)
-                                  }, 250)
-    //return query_result
-    return Promise.resolve({ type: 'text', content: query_result })
+    return new Promise((resolve, reject) => {
+    MongoClient.connect(
+        "mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers",
+        function(err, db) {
+            if (err) { console.log('MongoClient.connect error')
+                        reject(err) }
+                        
+            var cursor = db.collection("TheAvengers").find(query)
+            cursor.toArray((err, result) => {
+                if (err) { console.log('collection.find() error')
+                           reject(err) }
+                           
+                if (result.length > 0) {
+                    db.close()
+                    resolve(result[0])
+                }
+            })
+        })
+    })
 }
 
 
