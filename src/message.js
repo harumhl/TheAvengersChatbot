@@ -52,7 +52,7 @@ const replyMessage = (message) => {
             if(result.action.slug === 'ask-facts-character-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
-                console.log(query_result)
+                console.log(query_result) 
                 console.log(result)
                 console.log(result.status)
                 if (result['status'] >= 300) {
