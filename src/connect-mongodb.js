@@ -42,12 +42,12 @@ const connectAndFindDoc = (query) => {
     MongoClient.connect(
         "mongodb://haru_recast:haru_recast@ds127963.mlab.com:27963/theavengers",
         function(err, db) {
-            if (err) { console.log('MongoClient.connect error')
+            if (err) { console.log('MongoClient.connect error', err)
                         reject(err) }
                         
             var cursor = db.collection("TheAvengers").find(query)
             cursor.toArray((err, result) => {
-                if (err) { console.log('collection.find() error')
+                if (err) { console.log('collection.find() error', err)
                            reject(err) }
                            
                 if (result.length > 0) {
@@ -60,7 +60,7 @@ const connectAndFindDoc = (query) => {
 }
 
 
-//connectAndFindDoc({hero_name: "Hulk"}).then(console.log, console.error)
+connectAndFindDoc({hero_name: "Hulk"}).then(console.log, console.error)
 //console.log("the end")
 //console.log(query_result)
 module.exports = connectAndFindDoc

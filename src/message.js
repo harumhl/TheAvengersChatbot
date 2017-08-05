@@ -51,6 +51,7 @@ const replyMessage = (message) => {
             console.log(result.getMemory('query-hero-name').raw)
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
+                console.log("Hmm")
                 console.log(query_result)
                 console.log(result.status)
                 if (result['status'] >= 300) {
@@ -69,6 +70,7 @@ const replyMessage = (message) => {
                 .then(() => console.log("answered for ask-facts-character-name"))
                 .catch(err => console.error('Error in ask-facts-character-name reply: ', err))
                 })
+                console.log("out")
             }
             else if(result.action.slug === 'ask-facts-actor-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
