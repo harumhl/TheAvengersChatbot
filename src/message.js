@@ -40,30 +40,32 @@ const replyMessage = (message) => {
       result.replies.forEach(replyContent => message.addReply({ type: 'text', content: replyContent }))
     }
 
+        
+        // Do some code after sending messages
+    console.log(message)
+    message.addReply({type: 'text', content: "hi"})
+    message.reply()
+    if (result.action && result.action.done) {
+        if(result.action.slug === 'ask-facts-character-name') {
+            connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
+            .then(query_result => {
+                  console.log(query_result)
+                  console.log(query_result['character_name'])
+                  console.log(result)
+                  message.addReply({ type: 'text', content: query_result['character_name'] })
+                  message.addReply({ type: 'text', content: 'whatever' })
+                  message.addReply(query_result)
+                  message.addReply({ type: 'text', content: `more stars` })
+                  message.reply()
+            },console.error)
+        }
+    }
+        
+        
+        
     // Send all replies
     message.reply()
     .then(() => {
-      // Do some code after sending messages
-        console.log(message)
-        console.log(message['addReply'])
-        console.log(message['reply'])
-        message.addReply({type: 'text', content: "hi"})
-        message.reply()
-        if (result.action && result.action.done) {
-          if(result.action.slug === 'ask-facts-character-name') {
-            connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
-                .then(query_result => {
-                      console.log(query_result)
-                      console.log(query_result['character_name'])
-                      console.log(result)
-                      message.addReply({ type: 'text', content: query_result['character_name'] })
-                      message.addReply({ type: 'text', content: 'whatever' })
-                      message.addReply(query_result)
-                      message.addReply({ type: 'text', content: `more stars` })
-                      message.reply()
-            },console.error)
-          }
-        }
     })
     .catch(err => {
       console.error('Error while sending message to channel', err)
