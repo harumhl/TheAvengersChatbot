@@ -51,10 +51,10 @@ const replyMessage = (message) => {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
                 console.log(query_result)
-                message.addReply({type: 'text', content: query_result['character_name']})
-                const answers = ["hi","yo","um","hehe","hee"]
+                const answers = ["I think it's ","yo","um","hehe","hee"]
                 message.addReply({type: 'text', content: random(answers)})
                 message.addReply({type: 'text', content: `${query_result.character_name} says hi`})
+                message.addReply({type: 'text', content: '${query_result.character_name} says hi'})
                 message.reply()
                 .then(() => console.log("answered"))
                 .catch(err => console.error('Error in developer-defined replies: ', err))
