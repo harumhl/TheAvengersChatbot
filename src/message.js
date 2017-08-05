@@ -45,12 +45,12 @@ const replyMessage = (message) => {
     // Develop-defined message replies
     if (result.action && result.action.done) {
         if(result.action.slug === 'ask-facts-character-name') {
-            message.addReply({ type: 'text', content: 'hi' })
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
-            .then(function(query_result) {
+            .then(query_result => {
                   console.log(query_result)
                   console.log(query_result['character_name'])
                   console.log(result)
+                  console.log(message)
                   message.addReply({ type: 'text', content: 'whatever' })
                   message.addReply({ type: 'text', content: query_result['character_name'] })
                   //message.addReply(query_result)
