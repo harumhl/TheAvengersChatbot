@@ -66,11 +66,11 @@ const replyMessage = (message) => {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
                 console.log(query_result)
-                const answers = [`I think it's ${query_result.actor_name}`,
-                                 `It's ${query_result.actor_name}, isn't it?`,
-                                 `If I remember correctly, it is ${query_result.actor_name}.`,
-                                 `My memory tells me it is ${query_result.actor_name}`,
-                                 `Hmm, I have a strong feeling it must be ${query_result.actor_name}`]
+                const answers = [`I think it's ${query_result.actor}`,
+                                 `It's ${query_result.actor}, isn't it?`,
+                                 `If I remember correctly, it is ${query_result.actor}.`,
+                                 `My memory tells me it is ${query_result.actor}`,
+                                 `Hmm, I have a strong feeling it must be ${query_result.actor}`]
                 message.addReply({type: 'text', content: random(answers)})
                 message.reply()
                 .then(() => console.log("answered for ask-facts-actor-name"))
