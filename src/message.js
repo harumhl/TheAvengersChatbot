@@ -45,7 +45,7 @@ const replyMessage = (message) => {
     message.reply()
     .then(() => {
         // Do some code after sending messages
-        // Develop-defined message replies
+        // Developer-defined message replies
         if (result.action && result.action.done) {
             if(result.action.slug === 'ask-facts-character-name') {
             connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
@@ -57,7 +57,7 @@ const replyMessage = (message) => {
                 message.addReply({type: 'text', content: `${query_result.character_name} says hi`})
                 message.reply()
                 .then(() => console.log("answered"))
-                .catch(err => console.error('ugh', err))
+                .catch(err => console.error('Error in developer-defined replies: ', err))
                 })
             }
         }
