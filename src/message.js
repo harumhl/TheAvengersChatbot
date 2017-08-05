@@ -53,9 +53,9 @@ const replyMessage = (message) => {
             .then(query_result => {
                 console.log(query_result)
                 message.addReply({type: 'text', content: query_result['character_name'] })
-                message.addReply({type: 'text', content: `${query_result.character_name} says hi`})
+                message.addReply({type: 'text', content: '${query_result.character_name} says hi'})
                 const answers = ["hi","yo","um","hehe","hee"]
-                  message.addReply({type: 'text', content: random(answers)})
+                message.addReply({type: 'text', content: random(answers)})
                 message.reply()
                 })
             }
