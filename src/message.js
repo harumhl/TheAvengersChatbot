@@ -49,12 +49,8 @@ const replyMessage = (message) => {
         console.log(result.getMemory('query-hero-name').raw)
         if (result.action && result.action.done) {
             if(result.action.slug === 'ask-facts-character-name') {
-            connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
+            connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
-                if (result['status'] >= 300) {
-                    message.addReply("Sorry, my head is overloaded right now.. Ask me differently")
-                    message.reply()
-                }
                 console.log(query_result)
                 const answers = [`I think it's ${query_result.character_name}`,
                                  `It's ${query_result.character_name}, isn't it?`,
@@ -66,14 +62,10 @@ const replyMessage = (message) => {
                 .then(() => console.log("answered for ask-facts-character-name"))
                 .catch(err => console.error('Error in ask-facts-character-name reply: ', err))
                 })
-                console.log("out")
-                console.log(result['status'])
-                console.log(message)
             }
             else if(result.action.slug === 'ask-facts-actor-name') {
-            connectAndFindDoc({hero_name: result.getMemory('query-hero-name').raw})
+            connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
-                console.log(result.getMemory('query-hero-name').raw)
                 console.log(query_result)
                 const answers = [`I think it's ${query_result.actor}`,
                                  `It's ${query_result.actor}, isn't it?`,
@@ -86,9 +78,20 @@ const replyMessage = (message) => {
                 .catch(err => console.error('Error in ask-facts-actor-name reply: ', err))
                 })
             }
-
+            else if(result.action.slug === 'ask-bot-favorite-hero') {
+            connectAndFindDoc('hero_names', "")
+            .then(query_result => {
+                  var favorite_hero = random(query_result)
+                  result.setMemory({'bot-favorite-hero':favorite_hero})
+                  const answers = [`My favorite hero is ${favorite_hero}`,
+                                   `It's ${favorite_hero}`,
+                                   `${favorite_hero} is simply the best!`,
+                                   `${favorite_hero} is my hero and it won't change'`]
+                  message.addReply({type: 'text', content: random(answers)})
+                  message.reply()
+                })
+            }
         }
-
     })
     .catch(err => {
       console.error('Error while sending message to channel', err)
