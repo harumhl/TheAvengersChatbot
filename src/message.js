@@ -89,20 +89,18 @@ const replyMessage = (message) => {
             connectAndFindDoc('hero_names', "")
             .then(query_result => {
                 // After getting a list of heroes, pick one randomly only if not picked in this convo
-                var favorite_hero = result.getMemory('bot-favorite-hero').value || random(query_result)
+                var favorite_hero = result.getMemory('bot-favorite-hero') ||
+                                    {value: random(query_result)}
                 if(result.getMemory('bot-favorite-hero') === null) {
-                    result.setMemory({"bot-favorite-hero":{value: favorite_hero}})
-                }
-                else {
-                  
+                    result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
                 }
                 console.log(result.getMemory('bot-favorite-hero'))
                       
                 // Answering back - whether it's just picked or it was decided previously
-                const answers = [`My favorite hero is ${favorite_hero}`,
-                                `It's ${favorite_hero}`,
-                                `${favorite_hero} is simply the best!`,
-                                `${favorite_hero} is my hero and it won't change'`]
+                const answers = [`My favorite hero is ${favorite_hero.value}`,
+                                `It's ${favorite_hero.value}`,
+                                `${favorite_hero.value} is simply the best!`,
+                                `${favorite_hero.value} is my hero and it won't change'`]
                 message.addReply({type: 'text', content: random(answers)})
                 message.reply()
                 .then(() => console.log("answered for ask-bot-favorite-hero"))
