@@ -42,16 +42,18 @@ const replyMessage = (message) => {
     }
         
     // Send all replies
-    message.reply()
+    message.reply()      // Original reply in https://recast.ai is sent back first, usually "hmm.."
     .then(() => {
-        // Do some code after sending messages
+
         // Developer-defined message replies
         if (result.action && result.action.done) {
+            // User asks the bot to translate hero name -> character name (e.g. Iron Man -> Tony Stark)
             if(result.action.slug === 'ask-facts-character-name') {
             connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
                 console.log(result.getMemory('query-hero-name'))
                 console.log(query_result)
+                  
                 const answers = [`I think it's ${query_result.character_name}`,
                                  `It's ${query_result.character_name}, isn't it?`,
                                  `If I remember correctly, it is ${query_result.character_name}.`,
@@ -63,11 +65,13 @@ const replyMessage = (message) => {
                 .catch(err => console.error('Error in ask-facts-character-name reply: ', err))
                 })
             }
+            // User asks the bot to translate hero name -> actor (e.g. Iron Man -> Robert Downey Jr)
             else if(result.action.slug === 'ask-facts-actor-name') {
             connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
                 console.log(result.getMemory('query-hero-name'))
                 console.log(query_result)
+                  
                 const answers = [`I think it's ${query_result.actor}`,
                                  `It's ${query_result.actor}, isn't it?`,
                                  `If I remember correctly, it is ${query_result.actor}.`,
@@ -79,9 +83,10 @@ const replyMessage = (message) => {
                 .catch(err => console.error('Error in ask-facts-actor-name reply: ', err))
                 })
             }
+            //
             else if(result.action.slug === 'ask-bot-favorite-hero') {
                 console.log(result.getMemory('bot-favorite-hero'))
-                if(typeof result.getMemory('bot-favorite-hero') === null) {
+                if(result.getMemory('bot-favorite-hero') === null) {
                     console.log("tis undefined")}
             connectAndFindDoc('hero_names', "")
             .then(query_result => {
