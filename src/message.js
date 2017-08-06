@@ -85,7 +85,7 @@ const replyMessage = (message) => {
                    (result.getMemory('bot-favorite-hero') === null) ||
                    (!(result.getMemory('bot-favorite-hero')))) {
                   
-                    result.setMemory({"bot-favorite-hero": favorite_hero.value})
+                    result.setMemory({"bot-favorite-hero": favorite_hero})
                     .catch(err => console.error("Error in setMemory for bot-favorite-hero", err))
                 }
                 console.log(result.getMemory('bot-favorite-hero'))
