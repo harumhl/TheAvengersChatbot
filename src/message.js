@@ -95,7 +95,7 @@ const replyMessage = (message) => {
                     .catch(err => console.error('Error from connectAndFindDoc(hero_names)', err))
                 }
           
-                var favorite_hero = result.getMemory('bot-favorite-hero')
+                var favorite_hero = result.getMemory('bot-favorite-hero').value
                 const answers = [`My favorite hero is ${favorite_hero}`,
                                    `It's ${favorite_hero}`,
                                    `${favorite_hero} is simply the best!`,
@@ -105,8 +105,8 @@ const replyMessage = (message) => {
                 .then(() => console.log("answered for ask-bot-favorite-hero"))
                 .catch(err => console.error('Error in ask-bot-favorite-hero reply: ', err))
           }
-        }
-    })
+        } // end of if (result.action && result.action.done)
+    }) // end of message.reply().then
     .catch(err => {
       console.error('Error while sending message to channel', err)
     })
