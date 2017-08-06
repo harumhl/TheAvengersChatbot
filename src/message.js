@@ -85,7 +85,7 @@ const replyMessage = (message) => {
                    (!(result.getMemory('bot-favorite-hero')))) {
                   
                     favorite_hero = random(query_result)
-                    result.setMemory({'bot-favorite-hero': favorite_hero})
+                    result.setMemory({'bot-favorite-hero': {value: favorite_hero}})
                     .catch(err => console.error("Error in setMemory for bot-favorite-hero", err))
                 }
                 else {
@@ -95,10 +95,10 @@ const replyMessage = (message) => {
                 console.log(favorite_hero)
                       
                 // Answering back - whether it's just picked or it was decided previously
-                const answers = [`My favorite hero is ${favorite_hero.value}`,
-                                `It's ${favorite_hero.value}`,
-                                `${favorite_hero.value} is simply the best!`,
-                                `${favorite_hero.value} is my hero and it won't change'`]
+                const answers = [`My favorite hero is ${favorite_hero}`,
+                                `It's ${favorite_hero}`,
+                                `${favorite_hero} is simply the best!`,
+                                `${favorite_hero} is my hero and it won't change'`]
                 message.addReply({type: 'text', content: random(answers)})
                 message.reply()
                 .then(() => console.log("answered for ask-bot-favorite-hero"))
