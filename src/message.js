@@ -87,6 +87,7 @@ const replyMessage = (message) => {
                    (result.getMemory('bot-favorite-hero') === 'undefined')) {
                   
                     result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
+                    .catch(err => console.error("Error in setMemory for bot-favorite-hero", err))
                     console.log("failed")
                 }
                 console.log(result.getMemory('bot-favorite-hero'))
