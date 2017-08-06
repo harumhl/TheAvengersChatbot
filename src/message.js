@@ -95,6 +95,7 @@ const replyMessage = (message) => {
                     .catch(err => console.error('Error from connectAndFindDoc(hero_names)', err))
                 }
           
+                // Answering back - whether it's just picked or it was decided previously
                 var favorite_hero = result.getMemory('bot-favorite-hero').value
                 const answers = [`My favorite hero is ${favorite_hero}`,
                                    `It's ${favorite_hero}`,
