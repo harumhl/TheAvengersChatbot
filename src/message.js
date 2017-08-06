@@ -79,6 +79,9 @@ const replyMessage = (message) => {
                 })
             }
             else if(result.action.slug === 'ask-bot-favorite-hero') {
+                console.log(result.getMemory('bot-favorite-hero'))
+                if(typeof result.getMemory('bot-favorite-hero') === 'undefined') {
+                    console.log("tis undefined")}
             connectAndFindDoc('hero_names', "")
             .then(query_result => {
                   console.log(query_result)
