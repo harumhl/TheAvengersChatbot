@@ -88,9 +88,11 @@ const replyMessage = (message) => {
             // In order to keep everything synchronous, call mongoDB whether bot-fav-hero is set or not
             connectAndFindDoc('hero_names', "")
             .then(query_result => {
-                // After getting a list of heroes, pick one randomly only if not picked in this convo
+                // After getting a list of heroes, check if there's one in memory or pick one randomly
+                // (since null.value cannot be done, keep favorite_hero as a dict, not a string)
                 var favorite_hero = result.getMemory('bot-favorite-hero') ||
                                     {value: random(query_result)}
+                  
                 if(result.getMemory('bot-favorite-hero') === null) {
                     result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
                 }
