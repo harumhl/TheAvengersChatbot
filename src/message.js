@@ -89,7 +89,7 @@ const replyMessage = (message) => {
                                    `${favorite_hero} is simply the best!`,
                                    `${favorite_hero} is my hero and it won't change'`]
                   message.addReply({type: 'text', content: random(answers)})
-                  message.reply()
+                  message.reply() 
                 })
             .catch(err => console.error('Error from connectAndFindDoc(hero_names)', err))
             }
