@@ -81,7 +81,8 @@ const replyMessage = (message) => {
                 var favorite_hero = result.getMemory('bot-favorite-hero') ||
                                     {value: random(query_result)}
                   
-                if(result.getMemory('bot-favorite-hero') === null) {
+                if(result.getMemory('bot-favorite-hero') === null ||
+                   typeof result.getMemory('bot-favorite-hero') == 'undefined') {
                     result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
                 }
                 console.log(result.getMemory('bot-favorite-hero'))
