@@ -89,7 +89,7 @@ const replyMessage = (message) => {
             connectAndFindDoc('hero_names', "")
             .then(query_result => {
                 // After getting a list of heroes, pick one randomly only if not picked in this convo
-                var favorite_hero = result.getMemory('bot-favorite-hero') && random(query_result)
+                var favorite_hero = result.getMemory('bot-favorite-hero') || random(query_result)
                 if(result.getMemory('bot-favorite-hero') === null) {
                     result.setMemory({"bot-favorite-hero":{value: favorite_hero}})
                 }
