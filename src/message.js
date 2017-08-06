@@ -6,6 +6,7 @@
 const recastai = require('recastai')
 const connectAndFindDoc = require('./connect-mongodb')
 const random = array => { return array[Math.floor(Math.random() * array.length)] }
+var favorite_hero
 
 // This function is the core of the bot behaviour
 const replyMessage = (message) => {
@@ -78,15 +79,17 @@ const replyMessage = (message) => {
             .then(query_result => {
                 // After getting a list of heroes, check if there's one in memory or pick one randomly
                 // (since null.value cannot be done, keep favorite_hero as a dict, not a string)
-                const favorite_hero = result.getMemory('bot-favorite-hero') ||
-                                    {value: random(query_result)} 
-
+                
                 if((typeof result.getMemory('bot-favorite-hero') === 'undefined') ||
                    (result.getMemory('bot-favorite-hero') === null) ||
                    (!(result.getMemory('bot-favorite-hero')))) {
                   
+                    favorite_hero = random(query_result)
                     result.setMemory({'bot-favorite-hero': favorite_hero})
                     .catch(err => console.error("Error in setMemory for bot-favorite-hero", err))
+                }
+                else {
+                    favorite_hero = result.getMemory('bot-favorite-hero').raw
                 }
                 console.log(result.getMemory('bot-favorite-hero'))
                 console.log(favorite_hero)
