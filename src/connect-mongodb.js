@@ -68,7 +68,7 @@ const connectAndFindDoc = (query_type, query) => {
                         hero_names.push(doc['hero_name'])
                     })
                     db.close()
-                    resolve({hero_names: hero_names})
+                    resolve(hero_names)
                 })
             }
 
@@ -77,7 +77,8 @@ const connectAndFindDoc = (query_type, query) => {
 }
 
 
-connectAndFindDoc('find', {hero_name: "Hulk"}).then(console.log, console.error)
+//connectAndFindDoc('find', {hero_name: "Hulk"}).then(console.log, console.error)
+connectAndFindDoc('hero_names', "").then(console.log, console.error)
 //console.log("the end")
 //console.log(query_result)
 module.exports = connectAndFindDoc
