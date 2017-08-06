@@ -82,7 +82,8 @@ const replyMessage = (message) => {
             connectAndFindDoc('hero_names', "")
             .then(query_result => {
                   console.log(query_result)
-                  const botFavoriteHero = {value: random(query_result)}
+                  var favorite_hero = random(query_result)
+                  const botFavoriteHero = {confidence: 1, value: favorite_hero, raw: favorite_hero,}
                   console.log(botFavoriteHero)
                   console.log(botFavoriteHero.value)
                   result.setMemory({botFavoriteHero})
