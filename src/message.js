@@ -93,7 +93,7 @@ const replyMessage = (message) => {
                   
                 if(result.getMemory('bot-favorite-hero') === null ||
                    typeof result.getMemory('bot-favorite-hero') === 'undefined' ||
-                   !(result.getMemory('bot-favorite-hero'))
+                   !(result.getMemory('bot-favorite-hero')) ||
                    result.getMemory('bot-favorite-hero') === 'undefined') {
                  //   result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
                     console.log("failed")
