@@ -47,6 +47,15 @@ const connectAndFindDoc = (query_type, query) => {
 }
 
 
+var client = http.createClient(80, "facebook.com");
+request = client.request();
+request.on('response', function( res ) {
+           res.on('data', function( data ) {
+                  console.log( data.toString() );
+                  } );
+           } );
+request.end();
+
 //connectAndFindDoc('find', {hero_name: "Hulk"}).then(console.log, console.error)
 //connectAndFindDoc('hero_names', "").then(console.log, console.error)
 module.exports = connectAndFindDoc
