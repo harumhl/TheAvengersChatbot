@@ -82,10 +82,11 @@ const replyMessage = (message) => {
                                     {value: random(query_result)}
                   
                 if(result.getMemory('bot-favorite-hero') === null ||
-                   typeof result.getMemory('bot-favorite-hero') == 'undefined') {
+                   typeof result.getMemory('bot-favorite-hero') === 'undefined') {
                     result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
                 }
                 console.log(result.getMemory('bot-favorite-hero'))
+                console.log(typeof result.getMemory('bot-favorite-hero'))
                 console.log(favorite_hero)
                       
                 // Answering back - whether it's just picked or it was decided previously
