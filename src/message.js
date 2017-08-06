@@ -85,9 +85,11 @@ const replyMessage = (message) => {
                   var favorite_hero = random(query_result)
                   const botFavoriteHero = {confidence: 1, value: favorite_hero, raw: favorite_hero,}
                   console.log(botFavoriteHero)
-                  console.log(botFavoriteHero.value)
                   result.setMemory({botFavoriteHero})
                   console.log(result.getMemory('botFavoriteHero'))
+                  result.setMemory({"bot-favorite-hero":
+                                   {confidence: 1, value: favorite_hero, raw: favorite_hero,}})
+                  console.log(result.getMemory('bot-favorite-hero'))
                   const answers = [`My favorite hero is ${favorite_hero}`,
                                    `It's ${favorite_hero}`,
                                    `${favorite_hero} is simply the best!`,
