@@ -85,26 +85,29 @@ const replyMessage = (message) => {
             }
             // User asks the bot what its favorite hero is
             else if(result.action.slug === 'ask-bot-favorite-hero') {
-                // Randomly picking a hero if not picked yet in the conversation
+            // In order to keep everything synchronous, call mongoDB whether bot-fav-hero is set or not
+            connectAndFindDoc('hero_names', "")
+            .then(query_result => {
+                // After getting a list of heroes, pick one randomly only if not picked in this convo
                 if(result.getMemory('bot-favorite-hero') === null) {
-                    connectAndFindDoc('hero_names', "")
-                    .then(query_result => {
-                          result.setMemory({"bot-favorite-hero":{value: random(query_result)}})
-                          console.log(result.getMemory('bot-favorite-hero'))
-                    })
-                    .catch(err => console.error('Error from connectAndFindDoc(hero_names)', err))
+                    result.setMemory({"bot-favorite-hero":{value: random(query_result)}})
                 }
-          
+                console.log(result.getMemory('bot-favorite-hero'))
+                      
                 // Answering back - whether it's just picked or it was decided previously
                 var favorite_hero = result.getMemory('bot-favorite-hero').value
                 const answers = [`My favorite hero is ${favorite_hero}`,
-                                   `It's ${favorite_hero}`,
-                                   `${favorite_hero} is simply the best!`,
-                                   `${favorite_hero} is my hero and it won't change'`]
+                                `It's ${favorite_hero}`,
+                                `${favorite_hero} is simply the best!`,
+                                `${favorite_hero} is my hero and it won't change'`]
                 message.addReply({type: 'text', content: random(answers)})
                 message.reply()
                 .then(() => console.log("answered for ask-bot-favorite-hero"))
                 .catch(err => console.error('Error in ask-bot-favorite-hero reply: ', err))
+
+            })
+            .catch(err => console.error('Error from connectAndFindDoc(hero_names)', err))
+          
           }
         } // end of if (result.action && result.action.done)
     }) // end of message.reply().then
