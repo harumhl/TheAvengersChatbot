@@ -80,22 +80,13 @@ const replyMessage = (message) => {
                 // (since null.value cannot be done, keep favorite_hero as a dict, not a string)
                 var favorite_hero = result.getMemory('bot-favorite-hero') ||
                                     {value: random(query_result)}
-                if(result.getMemory('bot-favorite-hero') === null) console.log("null")
-                //if(result.getMemory('bot-favorite-hero') == null) console.log("null2")
+
+                if((typeof result.getMemory('bot-favorite-hero') === 'undefined') ||
+                   (result.getMemory('bot-favorite-hero') === null) ||
+                   (!(result.getMemory('bot-favorite-hero'))) ||
+                   (result.getMemory('bot-favorite-hero') === 'undefined')) {
                   
-                if(typeof result.getMemory('bot-favorite-hero') === 'undefined') console.log("to undi")
-                //if(typeof result.getMemory('bot-favorite-hero') == 'undefined') console.log("to undi2")
-                
-                if(!(result.getMemory('bot-favorite-hero'))) console.log("exclaim")
-                
-                if(result.getMemory('bot-favorite-hero') === 'undefined') console.log("undefined")
-                //if(result.getMemory('bot-favorite-hero') == 'undefined') console.log("undefined2")
-                  
-                if(result.getMemory('bot-favorite-hero') === null ||
-                   typeof result.getMemory('bot-favorite-hero') === 'undefined' ||
-                   !(result.getMemory('bot-favorite-hero')) ||
-                   result.getMemory('bot-favorite-hero') === 'undefined') {
-                 //   result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
+                    result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
                     console.log("failed")
                 }
                 console.log(result.getMemory('bot-favorite-hero'))
