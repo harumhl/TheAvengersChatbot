@@ -79,7 +79,7 @@ const replyMessage = (message) => {
                 // After getting a list of heroes, check if there's one in memory or pick one randomly
                 // (since null.value cannot be done, keep favorite_hero as a dict, not a string)
                 const favorite_hero = result.getMemory('bot-favorite-hero') ||
-                                    {value: random(query_result)}
+                                    {value: random(query_result)} 
 
                 if((typeof result.getMemory('bot-favorite-hero') === 'undefined') ||
                    (result.getMemory('bot-favorite-hero') === null) ||
