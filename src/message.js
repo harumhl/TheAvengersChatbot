@@ -89,7 +89,8 @@ const replyMessage = (message) => {
                    typeof result.getMemory('bot-favorite-hero') === 'undefined' ||
                    !(result.getMemory('bot-favorite-hero'))
                    result.getMemory('bot-favorite-hero') === 'undefined') {
-                    result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
+                 //   result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
+                  ;
                 }
                 console.log(result.getMemory('bot-favorite-hero'))
                 console.log(typeof result.getMemory('bot-favorite-hero'))
@@ -105,9 +106,8 @@ const replyMessage = (message) => {
                 .then(() => console.log("answered for ask-bot-favorite-hero"))
                 .catch(err => console.error('Error in ask-bot-favorite-hero reply: ', err))
             })
-            .catch(err => console.error('Error from connectAndFindDoc(hero_names)', err))
-          
-          }
+            .catch(err => console.error('Error from connectAndFindDoc(hero_names): ', err))
+            }
         } // end of if (result.action && result.action.done)
     }) // end of message.reply().then
     .catch(err => {
