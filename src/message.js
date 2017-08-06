@@ -47,6 +47,7 @@ const replyMessage = (message) => {
         // Developer-defined message replies
         if (result.action && result.action.done) {
             // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
+            console.log(result.getMemory('query-hero-name'))
             if(result.action.slug === 'ask-facts-character-name' ||
                result.action.slug === 'ask-facts-hero-name' ||
                result.action.slug === 'ask-facts-weight' ||
