@@ -50,6 +50,7 @@ const replyMessage = (message) => {
             console.log(result.getMemory('query-hero-name'))
             if(result.action.slug === 'ask-facts-character-name' ||
                result.action.slug === 'ask-facts-hero-name' ||
+               result.action.slug === 'ask-facts-actor-name' ||
                result.action.slug === 'ask-facts-weight' ||
                result.action.slug === 'ask-facts-height') {
             connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw},
