@@ -83,13 +83,15 @@ const replyMessage = (message) => {
             .then(query_result => {
                   console.log(query_result)
                   var favorite_hero = random(query_result)
-                  result.setMemory({'bot-favorite-hero':favorite_hero})
+                  console.log(favorite_hero)
+                  console.log(result)
+                  result.setMemory({bot-favorite-hero:{value:favorite_hero}})
                   const answers = [`My favorite hero is ${favorite_hero}`,
                                    `It's ${favorite_hero}`,
                                    `${favorite_hero} is simply the best!`,
                                    `${favorite_hero} is my hero and it won't change'`]
                   message.addReply({type: 'text', content: random(answers)})
-                  message.reply() 
+                  message.reply()
                 })
             .catch(err => console.error('Error from connectAndFindDoc(hero_names)', err))
             }
