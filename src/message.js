@@ -83,15 +83,12 @@ const replyMessage = (message) => {
 
                 if((typeof result.getMemory('bot-favorite-hero') === 'undefined') ||
                    (result.getMemory('bot-favorite-hero') === null) ||
-                   (!(result.getMemory('bot-favorite-hero'))) ||
-                   (result.getMemory('bot-favorite-hero') === 'undefined')) {
+                   (!(result.getMemory('bot-favorite-hero')))) {
                   
-                    result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
+                    result.setMemory({"bot-favorite-hero": favorite_hero.value})
                     .catch(err => console.error("Error in setMemory for bot-favorite-hero", err))
-                    console.log("failed")
                 }
                 console.log(result.getMemory('bot-favorite-hero'))
-                console.log(typeof result.getMemory('bot-favorite-hero'))
                 console.log(favorite_hero)
                       
                 // Answering back - whether it's just picked or it was decided previously
