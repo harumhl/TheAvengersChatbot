@@ -47,40 +47,23 @@ const replyMessage = (message) => {
 
         // Developer-defined message replies
         if (result.action && result.action.done) {
-            // User asks the bot to translate hero name -> character name (e.g. Iron Man -> Tony Stark)
-            if(result.action.slug === 'ask-facts-character-name') {
-            connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw})
+            // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
+            if(result.action.slug.substring(10) === 'ask-facts-') {
+            connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw},
+                              result.action.slug)
             .then(query_result => {
                 console.log(result.getMemory('query-hero-name'))
                 console.log(query_result)
                   
-                const answers = [`I think it's ${query_result.character_name}`,
-                                 `It's ${query_result.character_name}, isn't it?`,
-                                 `If I remember correctly, it is ${query_result.character_name}.`,
-                                 `My memory tells me it is ${query_result.character_name}`,
-                                 `Hmm, I have a strong feeling it must be ${query_result.character_name}`]
+                const answers = [`I think it's ${query_result}`,
+                                 `It's ${query_result}, isn't it?`,
+                                 `If I remember correctly, it is ${query_result}.`,
+                                 `My memory tells me it is ${query_result}`,
+                                 `Hmm, I have a strong feeling it must be ${query_result}`]
                 message.addReply({type: 'text', content: random(answers)})
                 message.reply()
-                .then(() => console.log("answered for ask-facts-character-name"))
+                .then(() => console.log("answered for " + result.action.slug))
                 .catch(err => console.error('Error in ask-facts-character-name reply: ', err))
-                })
-            }
-            // User asks the bot to translate hero name -> actor (e.g. Iron Man -> Robert Downey Jr)
-            else if(result.action.slug === 'ask-facts-actor-name') {
-            connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw})
-            .then(query_result => {
-                console.log(result.getMemory('query-hero-name'))
-                console.log(query_result)
-                  
-                const answers = [`I think it's ${query_result.actor}`,
-                                 `It's ${query_result.actor}, isn't it?`,
-                                 `If I remember correctly, it is ${query_result.actor}.`,
-                                 `My memory tells me it is ${query_result.actor}`,
-                                 `Hmm, I have a strong feeling it must be ${query_result.actor}`]
-                message.addReply({type: 'text', content: random(answers)})
-                message.reply()
-                .then(() => console.log("answered for ask-facts-actor-name"))
-                .catch(err => console.error('Error in ask-facts-actor-name reply: ', err))
                 })
             }
             // User asks the bot what its favorite hero is

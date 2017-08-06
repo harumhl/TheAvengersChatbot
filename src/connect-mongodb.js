@@ -3,7 +3,7 @@ var http = require('http')
 var MongoClient = require('mongodb').MongoClient
 var Promise = require('es6-promise').Promise
 
-const connectAndFindDoc = (query_type, query) => {
+const connectAndFindDoc = (query_type, query, return_type) => {
     return new Promise((resolve, reject) => {
                        
     // Connecting to MongoDB
@@ -22,7 +22,9 @@ const connectAndFindDoc = (query_type, query) => {
                            
                     if (result.length > 0) {
                         db.close()
-                        resolve(result[0])
+                        // example of 'return_type': 'ask-facts-character-name'
+                        // get rid of 'ask-facts-' and change from '-' to '_'
+                        resolve(result[0][return_type.substring(10).replace("-","_")])
                     }
                 })
             }
@@ -46,15 +48,6 @@ const connectAndFindDoc = (query_type, query) => {
     })
 }
 
-
-var client = http.createClient(80, "facebook.com");
-request = client.request();
-request.on('response', function( res ) {
-           res.on('data', function( data ) {
-                  console.log( data.toString() );
-                  } );
-           } );
-request.end();
 
 //connectAndFindDoc('find', {hero_name: "Hulk"}).then(console.log, console.error)
 //connectAndFindDoc('hero_names', "").then(console.log, console.error)
