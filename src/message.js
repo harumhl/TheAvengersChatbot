@@ -47,8 +47,10 @@ const replyMessage = (message) => {
         // Developer-defined message replies
         if (result.action && result.action.done) {
             // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
-            if(result.action.slug.substring(10) === 'ask-facts-') {
-            console.log("ask-facts-")
+            if(result.action.slug === 'ask-facts-character-name' ||
+               result.action.slug === 'ask-facts-hero-name' ||
+               result.action.slug === 'ask-facts-weight' ||
+               result.action.slug === 'ask-facts-height') {
             connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw},
                               result.action.slug)
             .then(query_result => {
@@ -59,7 +61,8 @@ const replyMessage = (message) => {
                                  `It's ${query_result}, isn't it?`,
                                  `If I remember correctly, it is ${query_result}.`,
                                  `My memory tells me it is ${query_result}`,
-                                 `Hmm, I have a strong feeling it must be ${query_result}`]
+                                 `Hmm, I have a strong feeling it must be ${query_result}`,
+                                 `I would guess that it is ${query_result}`]
                 message.addReply({type: 'text', content: random(answers)})
                 message.reply()
                 .then(() => console.log("answered for " + result.action.slug))
