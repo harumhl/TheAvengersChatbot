@@ -44,11 +44,11 @@ const replyMessage = (message) => {
     // Send all replies
     message.reply()      // Original reply in https://recast.ai is sent back first, usually "hmm.."
     .then(() => {
-
         // Developer-defined message replies
         if (result.action && result.action.done) {
             // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
             if(result.action.slug.substring(10) === 'ask-facts-') {
+            console.log("ask-facts-")
             connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw},
                               result.action.slug)
             .then(query_result => {
