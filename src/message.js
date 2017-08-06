@@ -46,11 +46,11 @@ const replyMessage = (message) => {
     .then(() => {
         // Do some code after sending messages
         // Developer-defined message replies
-        console.log(result.getMemory('query-hero-name').raw)
         if (result.action && result.action.done) {
             if(result.action.slug === 'ask-facts-character-name') {
             connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
+                console.log(result.getMemory('query-hero-name'))
                 console.log(query_result)
                 const answers = [`I think it's ${query_result.character_name}`,
                                  `It's ${query_result.character_name}, isn't it?`,
@@ -66,6 +66,7 @@ const replyMessage = (message) => {
             else if(result.action.slug === 'ask-facts-actor-name') {
             connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw})
             .then(query_result => {
+                console.log(result.getMemory('query-hero-name'))
                 console.log(query_result)
                 const answers = [`I think it's ${query_result.actor}`,
                                  `It's ${query_result.actor}, isn't it?`,
@@ -80,7 +81,7 @@ const replyMessage = (message) => {
             }
             else if(result.action.slug === 'ask-bot-favorite-hero') {
                 console.log(result.getMemory('bot-favorite-hero'))
-                if(typeof result.getMemory('bot-favorite-hero') === 'undefined') {
+                if(typeof result.getMemory('bot-favorite-hero') === null) {
                     console.log("tis undefined")}
             connectAndFindDoc('hero_names', "")
             .then(query_result => {
