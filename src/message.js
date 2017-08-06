@@ -85,6 +85,7 @@ const replyMessage = (message) => {
                     result.setMemory({"bot-favorite-hero":{value: favorite_hero.value}})
                 }
                 console.log(result.getMemory('bot-favorite-hero'))
+                console.log(favorite_hero)
                       
                 // Answering back - whether it's just picked or it was decided previously
                 const answers = [`My favorite hero is ${favorite_hero.value}`,

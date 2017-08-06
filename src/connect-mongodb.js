@@ -49,6 +49,6 @@ const connectAndFindDoc = (query_type, query, return_type) => {
 }
 
 
-connectAndFindDoc('find', {hero_name: "Hawkeye"}, "ask-facts-actor-name").then(console.log, console.error)
-//connectAndFindDoc('hero_names', "").then(console.log, console.error)
+//connectAndFindDoc('find', {hero_name: "Hawkeye"}, "ask-facts-actor-name").then(console.log, console.error)
+connectAndFindDoc('hero_names', "", "").then(console.log, console.error)
 module.exports = connectAndFindDoc
