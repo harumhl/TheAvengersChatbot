@@ -68,7 +68,7 @@ const connectAndFindDoc = (query_type, query) => {
                         hero_names.push(doc['hero_name'])
                     })
                     db.close()
-                    resolve(hero_names)
+                    resolve({hero_names: hero_names})
                 })
             }
 
