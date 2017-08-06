@@ -77,6 +77,7 @@ const connectAndFindDoc = (query_type, query) => {
 }
 
 
+
 //connectAndFindDoc('find', {hero_name: "Hulk"}).then(console.log, console.error)
 connectAndFindDoc('hero_names', "").then(console.log, console.error)
 //console.log("the end")

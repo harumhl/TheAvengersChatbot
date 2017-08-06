@@ -82,11 +82,11 @@ const replyMessage = (message) => {
             connectAndFindDoc('hero_names', "")
             .then(query_result => {
                   console.log(query_result)
-                  var favorite_hero = random(query_result)
-                  console.log(favorite_hero)
-                  result.setMemory({"bot-favorite-hero":
-                                   {"confidence":1,"value": favorite_hero,"raw":favorite_hero}})
-                  console.log(result.getMemory('bot-favorite-hero'))
+                  const botFavoriteHero = {value: random(query_result)}
+                  console.log(botFavoriteHero)
+                  console.log(botFavoriteHero.value)
+                  result.setMemory({botFavoriteHero})
+                  console.log(result.getMemory('botFavoriteHero'))
                   const answers = [`My favorite hero is ${favorite_hero}`,
                                    `It's ${favorite_hero}`,
                                    `${favorite_hero} is simply the best!`,
