@@ -47,7 +47,7 @@ const connectAndFindDoc = (query_type, query, return_type) => {
                         if (return_type == "who" ||
                             return_type == "Who" ||
                             return_type == "what" ||
-                            return_type == "What" ||)
+                            return_type == "What")
                             resolve(random(result[0]["identity"]))
                                
                         // character name, weight, height are used as given
