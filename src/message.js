@@ -50,6 +50,8 @@ const replyMessage = (message) => {
         if (result.action && result.action.done) {
             // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
             console.log(result.getMemory('query-hero-name'))
+            console.log(result)
+            console.log(result.entities)
           /*
             if(result.action.slug === 'ask-facts') {
             connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw},
