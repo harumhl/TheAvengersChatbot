@@ -57,7 +57,7 @@ const replyMessage = (message) => {
             connectAndFindDoc('find',
                               {hero_name: {$regex: capitalizeFirstLettersEachWord(
                                                     result.getMemory('query-hero-name').raw)}},
-                              result.entities.question.value)
+                              result.entities.question[0].value)
             .then(query_result => {
                 console.log(result.getMemory('query-hero-name'))
                 console.log(query_result)

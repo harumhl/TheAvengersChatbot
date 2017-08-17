@@ -56,9 +56,9 @@ const connectAndFindDoc = (query_type, query, return_type) => {
 
 
 //connectAndFindDoc('find', {hero_name: "/^Iron*/"}, "ask-facts-actor-name").then(console.log, console.error)
-var pattern = "iron"
+var pattern = "man"
 pattern = pattern.toLowerCase().split(' ').map(x=>x[0].toUpperCase()+x.slice(1)).join(' ')
 // (capitalizing first letters of each word before calling find())
-connectAndFindDoc('find', {hero_name: {$regex: pattern} }, "ask-facts-actor-name").then(console.log, console.error)
+connectAndFindDoc('find', {hero_name: {$regex: pattern} }, "real name").then(console.log, console.error)
 //connectAndFindDoc('hero_names', "", "").then(console.log, console.error)
 module.exports = connectAndFindDoc
