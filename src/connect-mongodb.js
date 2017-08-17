@@ -24,7 +24,10 @@ const connectAndFindDoc = (query_type, query, return_type) => {
                         db.close()
                         // example of 'return_type': 'ask-facts-character-name'
                         // get rid of 'ask-facts-' and change from '-' to '_'
-                        resolve(result[0][return_type.substring(10).replace("-","_")])
+                        if (return_type == "real name")
+                            resolve(result[0]["character_name"])
+                        // character name, weight, height are used as given
+                        resolve(result[0][return_type.substring(10).replace(" ","_")])
                     }
                     else {
                         db.close()

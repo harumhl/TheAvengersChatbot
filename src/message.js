@@ -47,28 +47,34 @@ const replyMessage = (message) => {
     message.reply()      // Original reply in https://recast.ai is sent back first, usually "hmm.."
     .then(() => {
         // Developer-defined message replies
-          console.log(result)
           console.log(result.entities)
+          console.log(result.entities.question.value)
         if (result.action && result.action.done) {
             // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
             console.log(result.getMemory('query-hero-name'))
-          /*
+          
             if(result.action.slug === 'ask-facts') {
-            connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw},
-                              result.action.slug)
+            connectAndFindDoc('find',
+                              {hero_name: {$regex: capitalizeFirstLettersEachWord(
+                                                    result.getMemory('query-hero-name').raw)}},
+                              result.entities.question.value)
             .then(query_result => {
                 console.log(result.getMemory('query-hero-name'))
                 console.log(query_result)
                 
-                const answers = [`Yoyo ${query_result}`,
-                                 `Haha ${query_result}`]
+                  const answers = [`I think it's ${query_result}`,
+                                   `It's ${query_result}, isn't it?`,
+                                   `If I remember correctly, it is ${query_result}.`,
+                                   `My memory tells me it is ${query_result}`,
+                                   `Hmm, I have a strong feeling it must be ${query_result}`,
+                                   `I would guess that it is ${query_result}`]
                 message.addReply({type: 'text', content: random(answers)})
                 message.reply()
                 .then(() => console.log("answered for " + result.action.slug))
                 .catch(err => console.error('Error in ask-facts-character-name reply: ', err))
                 })
 
-            }*/
+            }
           
           
             if(result.action.slug === 'ask-facts-character-name' ||
