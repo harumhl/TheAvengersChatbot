@@ -48,6 +48,8 @@ const replyMessage = (message) => {
     .then(() => {
         // Developer-defined message replies
         console.log("1")
+        console.log(result.action)
+        console.log(result.action.done)
         if (result.action && result.action.done) {
             console.log("2")
             // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
