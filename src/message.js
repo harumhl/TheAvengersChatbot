@@ -69,7 +69,7 @@ const replyMessage = (message) => {
                                 `It's probably ${query_result}`,
                                 `I bet it's ${query_result}`]
                 
-                // If "Identity" is asked, then change the answer format
+                // If "Identity" is asked, then change the answer format 
                 if (result.entities.question[0].raw == "who" ||
                     result.entities.question[0].raw == "Who" ||
                     result.entities.question[0].raw == "what" ||
