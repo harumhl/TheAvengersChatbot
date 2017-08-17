@@ -68,7 +68,16 @@ const replyMessage = (message) => {
                                 `I would guess that it is ${query_result}`,
                                 `It's probably ${query_result}`,
                                 `I bet it's ${query_result}`]
-                message.addReply({type: 'text', content: random(answers)})
+                
+                // If "Identity" is asked, then change the answer format
+                if (result.entities.question[0].raw == "who" ||
+                    result.entities.question[0].raw == "Who" ||
+                    result.entities.question[0].raw == "what" ||
+                    result.entities.question[0].raw == "What")
+                    message.addReply({type: 'text',
+                                     content: result.entities.heroes[0].value + " is " + query_result})
+                else
+                    message.addReply({type: 'text', content: random(answers)})
                 message.reply()
                 .then(() => console.log("answered for " + result.action.slug))
                 .catch(err => console.error('Error in ask-facts-character-name reply: ', err))

@@ -2,6 +2,7 @@
 var http = require('http')
 var MongoClient = require('mongodb').MongoClient
 var Promise = require('es6-promise').Promise
+const random = array => { return array[Math.floor(Math.random() * array.length)] }
 
 const connectAndFindDoc = (query_type, query, return_type) => {
     return new Promise((resolve, reject) => {
@@ -42,6 +43,12 @@ const connectAndFindDoc = (query_type, query, return_type) => {
                         if (return_type == "big" ||
                             return_type == "tall")
                             resolve(result[0]["height"])
+                        
+                        if (return_type == "who" ||
+                            return_type == "Who" ||
+                            return_type == "what" ||
+                            return_type == "What" ||)
+                            resolve(random(result[0]["identity"]))
                                
                         // character name, weight, height are used as given
                         resolve(result[0][return_type.replace(" ","_")])
@@ -74,5 +81,7 @@ const connectAndFindDoc = (query_type, query, return_type) => {
 
 //connectAndFindDoc('find', {hero_name: "/^Iron*/"}, "ask-facts-actor-name").then(console.log, console.error)
 //connectAndFindDoc('find', {hero_name: {$regex: "iron"} }, "real name").then(console.log, console.error)
+connectAndFindDoc('find', {hero_name: {$regex: "Iron Man"} }, "who").then(result =>
+    { console.log("He is " + result) }, console.error)
 //connectAndFindDoc('hero_names', "", "").then(console.log, console.error)
 module.exports = connectAndFindDoc
