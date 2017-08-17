@@ -47,7 +47,9 @@ const replyMessage = (message) => {
     message.reply()      // Original reply in https://recast.ai is sent back first, usually "hmm.."
     .then(() => {
         // Developer-defined message replies
+        console.log("1")
         if (result.action && result.action.done) {
+            console.log("2")
             // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
             if(result.action.slug === 'ask-facts') {
                 console.log(result.entities.heroes[0].raw)
@@ -106,6 +108,7 @@ const replyMessage = (message) => {
                 })
                 .catch(err => console.error('Error from connectAndFindDoc(hero_names): ', err))
             }
+            console.log("3")
         } // end of if (result.action && result.action.done)
     }) // end of message.reply().then
     .catch(err => {
