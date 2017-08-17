@@ -47,7 +47,6 @@ const replyMessage = (message) => {
     message.reply()      // Original reply in https://recast.ai is sent back first, usually "hmm.."
     .then(() => {
         // Developer-defined message replies
-        console.log("1")
           
         // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
         if(result.action.slug === 'ask-facts') {
@@ -66,7 +65,9 @@ const replyMessage = (message) => {
                                 `If I remember correctly, it is ${query_result}.`,
                                 `My memory tells me it is ${query_result}`,
                                 `Hmm, I have a strong feeling it must be ${query_result}`,
-                                `I would guess that it is ${query_result}`]
+                                `I would guess that it is ${query_result}`,
+                                `It's probably ${query_result}`,
+                                `I bet it's ${query_result}`]
                 message.addReply({type: 'text', content: random(answers)})
                 message.reply()
                 .then(() => console.log("answered for " + result.action.slug))
@@ -97,9 +98,11 @@ const replyMessage = (message) => {
                 
                 // Answering back - whether it's just picked or it was decided previously
                 const answers = [`My favorite hero is ${favorite_hero.value}`,
+                                `I just simply love ${favorite_hero.value}`,
+                                `I want to hang out with ${favorite_hero.value}!`,
                                 `It's ${favorite_hero.value}`,
                                 `${favorite_hero.value} is simply the best!`,
-                                `${favorite_hero.value} is my hero and it won't change'`]
+                                `${favorite_hero.value} is my hero and it won't change`]
                 message.addReply({type: 'text', content: random(answers)})
                 message.reply()
                 .then(() => console.log("answered for ask-bot-favorite-hero"))
