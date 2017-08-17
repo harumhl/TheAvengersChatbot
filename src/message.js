@@ -75,10 +75,13 @@ const replyMessage = (message) => {
             // User asks the bot what its favorite hero is
             else if(result.action.slug === 'ask-bot-favorite-hero') {
                 // In order to keep everything synchronous, call mongoDB whether bot-fav-hero is set or not
+                console.log("asking bot fav hero")
                 connectAndFindDoc('hero_names', "", "")
                 .then(query_result => {
                       // After getting a list of heroes, check if there's one in memory or pick one randomly
                       // (since null.value cannot be done, keep favorite_hero as a dict, not a string)
+                      console.log(query_result)
+                      console.log(result.getMemory('bot-favorite-hero'))
                       var favorite_hero = result.getMemory('bot-favorite-hero') ||
                                             {value: random(query_result)}
 
