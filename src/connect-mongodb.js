@@ -26,6 +26,23 @@ const connectAndFindDoc = (query_type, query, return_type) => {
                         // get rid of 'ask-facts-' and change from '-' to '_'
                         if (return_type == "real name")
                             resolve(result[0]["character_name"])
+                               
+                        if (return_type == "actor" ||
+                            return_type == "actress" ||
+                            return_type == "actress name" ||
+                            return_type == "starred")
+                            resolve(result[0]["actor_name"])
+                               
+                        if (return_type == "heavy" ||
+                            return_type == "fat" ||
+                            return_type == "size" ||
+                            return_type == "weigh")
+                            resolve(result[0]["weight"])
+                        
+                        if (return_type == "big" ||
+                            return_type == "tall")
+                            resolve(result[0]["height"])
+                               
                         // character name, weight, height are used as given
                         resolve(result[0][return_type.replace(" ","_")])
                     }
