@@ -51,15 +51,15 @@ const replyMessage = (message) => {
           console.log(result.entities.question.value)
         if (result.action && result.action.done) {
             // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
-            console.log(result.getMemory('query-hero-name'))
+            console.log(result.entities.heroes[0].raw)
+            console.log(result.entities.question[0].raw)
           
             if(result.action.slug === 'ask-facts') {
             connectAndFindDoc('find',
                               {hero_name: {$regex: capitalizeFirstLettersEachWord(
-                                                    result.entities.heroes[0].value)}},
-                              result.entities.question[0].value)
+                                                    result.entities.heroes[0].raw)}},
+                              result.entities.question[0].raw)
             .then(query_result => {
-                console.log(result.getMemory('query-hero-name'))
                 console.log(query_result)
                 
                   const answers = [`I think it's ${query_result}`,
