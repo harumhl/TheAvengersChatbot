@@ -56,7 +56,7 @@ const replyMessage = (message) => {
             if(result.action.slug === 'ask-facts') {
             connectAndFindDoc('find',
                               {hero_name: {$regex: capitalizeFirstLettersEachWord(
-                                                    result.getMemory('query-hero-name').raw)}},
+                                                    result.entities.heroes[0].value)}},
                               result.entities.question[0].value)
             .then(query_result => {
                 console.log(result.getMemory('query-hero-name'))
