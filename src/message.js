@@ -6,7 +6,9 @@
 const recastai = require('recastai')
 const connectAndFindDoc = require('./connect-mongodb')
 const random = array => { return array[Math.floor(Math.random() * array.length)] }
-
+function capitalizeFirstLettersEachWord(str) {
+    return str.toLowerCase().split(' ').map(x=>x[0].toUpperCase()+x.slice(1)).join(' ')
+}
 // This function is the core of the bot behaviour
 const replyMessage = (message) => {
   // Instantiate Recast.AI SDK, just for request service
@@ -48,6 +50,25 @@ const replyMessage = (message) => {
         if (result.action && result.action.done) {
             // User asks the bot to translate one name into another (e.g. Iron Man -> Tony Stark)
             console.log(result.getMemory('query-hero-name'))
+          /*
+            if(result.action.slug === 'ask-facts') {
+            connectAndFindDoc('find', {hero_name: result.getMemory('query-hero-name').raw},
+                              result.action.slug)
+            .then(query_result => {
+                console.log(result.getMemory('query-hero-name'))
+                console.log(query_result)
+                
+                const answers = [`Yoyo ${query_result}`,
+                                 `Haha ${query_result}`]
+                message.addReply({type: 'text', content: random(answers)})
+                message.reply()
+                .then(() => console.log("answered for " + result.action.slug))
+                .catch(err => console.error('Error in ask-facts-character-name reply: ', err))
+                })
+
+            }*/
+          
+          
             if(result.action.slug === 'ask-facts-character-name' ||
                result.action.slug === 'ask-facts-hero-name' ||
                result.action.slug === 'ask-facts-actor-name' ||

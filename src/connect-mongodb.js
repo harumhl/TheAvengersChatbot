@@ -19,12 +19,16 @@ const connectAndFindDoc = (query_type, query, return_type) => {
                 cursor.toArray((err, result) => {
                     if (err) { console.log('collection.find() error', err)
                                reject(err) }
-                           
+                    
                     if (result.length > 0) {
                         db.close()
                         // example of 'return_type': 'ask-facts-character-name'
                         // get rid of 'ask-facts-' and change from '-' to '_'
                         resolve(result[0][return_type.substring(10).replace("-","_")])
+                    }
+                    else {
+                        db.close()
+                        resolve("Failed")
                     }
                 })
             }
@@ -43,12 +47,15 @@ const connectAndFindDoc = (query_type, query, return_type) => {
                     resolve(hero_names)
                 })
             }
-
         })
     })
 }
 
 
-//connectAndFindDoc('find', {hero_name: "Hawkeye"}, "ask-facts-actor-name").then(console.log, console.error)
-connectAndFindDoc('hero_names', "", "").then(console.log, console.error)
+//connectAndFindDoc('find', {hero_name: "/^Iron*/"}, "ask-facts-actor-name").then(console.log, console.error)
+var pattern = "iron"
+pattern = pattern.toLowerCase().split(' ').map(x=>x[0].toUpperCase()+x.slice(1)).join(' ')
+// (capitalizing first letters of each word before calling find())
+connectAndFindDoc('find', {hero_name: {$regex: pattern} }, "ask-facts-actor-name").then(console.log, console.error)
+//connectAndFindDoc('hero_names', "", "").then(console.log, console.error)
 module.exports = connectAndFindDoc
